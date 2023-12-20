@@ -1,0 +1,94 @@
+* {
+    color: aliceblue;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+#content-wrapper {
+    display: grid;
+    grid-template-columns: 30% 70%;
+    background-color: rgb(12, 11, 11);
+    min-height: 100vh;
+}
+
+#sidebar {
+    display: flex;
+    flex-direction: column;
+    padding: 1rem;
+    flex-grow: 1;
+    gap: 1rem;
+    border-right: 1px gray solid;
+}
+
+#top {
+    display: flex;
+    flex-direction: column;
+}
+
+#primary {
+    display: flex;
+    flex-direction: column;
+    row-gap: 0.5rem;
+}
+
+#projects {
+    flex-grow: 2
+
+}
+
+#bottom {
+    justify-self: end;
+}
+
+#content {
+    display: flex;
+    flex-direction: column;
+    padding: 1rem;
+    margin: 1rem;
+}
+
+#header {
+    display: flex;
+    align-items: center;
+    margin: 1.2rem 0.5rem;
+}
+
+h1 {
+    flex-grow: 2;
+
+}
+
+#setting {
+    font-size: 24px;
+}
+
+#todo-container {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    gap: 3px;
+}
+
+.todo {
+    display: flex;
+    padding: 1rem;
+    background-color: rgba(57, 57, 57, 0.562);
+}
+
+.task {
+    flex-grow: 2;
+}
+
+.star {
+    justify-self: end;
+}
+
+.input-container {
+    justify-self: end;
+}
+
+#input-task {
+    padding: 1rem;
+    background-color: rgba(57, 57, 57, 0.562);
+}
