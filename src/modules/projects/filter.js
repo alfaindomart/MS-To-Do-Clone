@@ -10,3 +10,10 @@ export function filterUncomplete(todos) {
     return !todos.checked;
 }
 
+// export function filterMyDay(todos) {
+    
+// }
+
+export function filterImportant(todos) {
+    return todos.important
+}

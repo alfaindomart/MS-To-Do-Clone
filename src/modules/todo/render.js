@@ -1,8 +1,6 @@
-import { todoContainer } from "../dom";
+import { clickImportant, todoContainer, checkTheBox, checkBoxes, starBtns } from "../dom";
 import { allProjects } from "../JSON/storage";
-import { checkBoxes } from "../dom";
-import { checkTheBox } from "../dom";
-import { filterCompleted, filterUncomplete } from "../projects/filter";
+import { filterCompleted, filterImportant, filterUncomplete } from "../projects/filter";
 
 /// Render todo
     //render the inputted todo in all
@@ -46,7 +44,10 @@ import { filterCompleted, filterUncomplete } from "../projects/filter";
 
         })
         checkBoxes = document.getElementsByClassName("check");
+        starBtns = document.getElementsByClassName("star");
+        clickImportant();
         checkTheBox();
+        console.log('starCheckbox');
     }
 
 /// Render the primary projects
@@ -68,10 +69,15 @@ export function renderPrimary(e) {
         break;
         case "completed": {
             console.log(currentProject)
-
             const renderCompleted = allProjects.filter(filterCompleted);
             console.log(renderCompleted)
             renderTodo(renderCompleted);
         }
+        break;
+        case "important": {
+            const renderImportant = allProjects.filter(filterImportant);
+            renderTodo(renderImportant);
+        }
+        break;
     }
 }

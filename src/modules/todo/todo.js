@@ -49,5 +49,18 @@ export function deleteTodo(e) {
     const delTodo = delBtn.closest('.todo');
     const delTodoIdx = delTodo.dataset.todoIndex;
     console.log(delTodoIdx);
-    allProjects
+}
+
+    //set todo as important
+export function setImportant(e) {
+    const importantBtn = e.target;
+    console.log(`importantBtn is ${importantBtn}`)
+    const closestTodo = importantBtn.closest('.todo');
+    console.log(`closestTodo is ${closestTodo}`)
+    const importantTodoIdx = closestTodo.dataset.todoIndex;
+    console.log(`importantTodoIdx is ${importantTodoIdx}`);
+    const importantTodo = allProjects[importantTodoIdx];
+    console.log(`importantTodo is ${importantTodo}`);
+    importantTodo.important = importantBtn.checked;
+    localStorage.setItem("todos", JSON.stringify(importantTodo));
 }

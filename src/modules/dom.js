@@ -1,5 +1,5 @@
 import { renderPrimary } from "./todo/render";
-import { getInput } from "./todo/todo";
+import { getInput, setImportant } from "./todo/todo";
 import { checked } from "./todo/todo";
 
 //todo container DOM - export to render
@@ -18,6 +18,7 @@ export const inputTask = document.getElementById("input-task");
 
 //todo DOM
 export let checkBoxes = document.getElementsByClassName("check");
+export let starBtns = document.getElementsByClassName("star");
 let deleteTodoBtn = document.getElementsByClassName("delete-btn");
 
 //handle checkbox event
@@ -32,3 +33,8 @@ export const clickPrimary = primary.addEventListener('click', renderPrimary)
 //handle input Todo event
 export function enterInput (){inputTask.addEventListener("keydown", getInput);}
 
+//handle Important button event
+export function clickImportant() {
+    Array.from(starBtns).forEach(starBtn => {starBtn.addEventListener('click', setImportant)
+})
+}
