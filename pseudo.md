@@ -1,12 +1,12 @@
 Microsoft Todo features:
-    - has my day, important, all projects, completed, Tasks
+DONE    - has my day, important, all projects, completed, Tasks
     - Projects:
         -add new projects
         - name project title
         - each project has its own separate todo
         - change theme of project
         - share, print, email, delete project
-        - primary projects can't be deleted
+DONE    - primary projects can't be deleted
         - all todo in project can be moved to other projects
     - Sidebar:
         - can drag drop sort projects (excluding primary projects)
@@ -14,7 +14,7 @@ Microsoft Todo features:
     -Todo:
         - each todo can be moved to other projects
         - todo can be checked/completed, add importance, deleted, change name, add reminder, add due date, add repeat, add file, add note, and add steps
-        - todo creation date can be seen
+DONE    - todo creation date can be seen
         - clicking on todo show a right side menu
 
 todo: {
@@ -27,8 +27,8 @@ todo: {
 }
 
 //Primary Projects Behaviour
-{All} has access to all unchecked (todo),
-all unchecked todo must be shown in All.
+DONE! {All} has access to all unchecked (todo),
+    all unchecked todo must be shown in All.
 
 All {
     Tasks {
@@ -54,7 +54,7 @@ All {
     }
 }
 
-{Important} has access to todo[important = true],
+DONE! {Important} has access to todo[important = true],
 {Important} also know where each todo came from.
 
 Important {
@@ -70,10 +70,10 @@ Important {
     }
 }
 
-if todo[checked = true], remove from all projects,
-{Completed} has access to todo[checked = true],
-all checked todo must be shown in {Completed},
-hide input box in {Completed}.
+DONE!   if todo[checked = true], remove from all projects,
+DONE!    {Completed} has access to todo[checked = true],
+DONE!   all checked todo must be shown in {Completed},
+   hide input box in {Completed}.
 
 Completed {
         Todo[0] {
@@ -244,4 +244,23 @@ in checked() {
         map allProjects, search object with the same index
         
     }
+}
+
+
+//Current project, Primary Projects, and Projectof behaviour
+user open todo app
+the app show last used project
+if last used project is 'kucing',
+Current project read H1 and set to H1 on load.
+Usert add new task, projectOf is 'kucing'.
+
+Then user clicked project travel 'travel'
+
+//Check duplicate projects function
+user click new projects
+run checkDuplicateProj()
+checkDuplicateProj() {
+    query select user projects
+    if user projects.length = 0, return
+    query select user
 }

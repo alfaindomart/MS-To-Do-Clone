@@ -17,3 +17,7 @@ export function filterUncomplete(todos) {
 export function filterImportant(todos) {
     return todos.important
 }
+
+// export function filterDefaultTasks(todos) {
+//     if 
+// }

@@ -1,7 +1,7 @@
 import { renderPrimary } from "./todo/render";
 import { getInput, setImportant } from "./todo/todo";
 import { checked } from "./todo/todo";
-
+import { addNewProj } from "./todo/render";
 //todo container DOM - export to render
 export const todoContainer = document.getElementById("todo-container")
 
@@ -12,6 +12,11 @@ const primary = document.getElementById("primary");
     const all = document.getElementById("all");
     const completed = document.getElementById("completed");
     const tasks = document.getElementById("tasks");
+
+//Projects Dom
+const projTitleMain = document.querySelector('h1');
+export const inputProject = document.getElementById("add-project");
+export const projectContainer = document.getElementById("projects");
 
 //input dom
 export const inputTask = document.getElementById("input-task");
@@ -38,3 +43,6 @@ export function clickImportant() {
     Array.from(starBtns).forEach(starBtn => {starBtn.addEventListener('click', setImportant)
 })
 }
+
+//handle add new project event
+export function enterProject () {inputProject.addEventListener('keydown', addNewProj)}

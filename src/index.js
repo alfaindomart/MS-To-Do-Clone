@@ -1,8 +1,10 @@
 import _ from 'lodash';
 import './style.css';
-import { enterInput, checkTheBox, clickPrimary, clickImportant } from './modules/dom';
+import { enterInput, checkTheBox, clickPrimary, clickImportant, enterProject } from './modules/dom';
+
 
 enterInput()
+enterProject()
 checkTheBox()
 clickPrimary
 clickImportant()

@@ -1,14 +1,16 @@
 import moment from 'moment';
 import { allProjects } from '../JSON/storage';
 import { get } from 'lodash';
-import { renderTodo } from './render';
+import { renderTodo, getCurrentProject } from './render';
 import { inputTask } from '../dom';
 import { inputStorage } from '../JSON/storage';
 
 //do something when press enter
 export function getInput(e) {
     if (e.keyCode === 13) {
-    allProjects.push(createTodo(inputTask.value));
+    const {currentProject} = getCurrentProject(e)
+    console.log(`current project is ${currentProject}`)
+    allProjects.push(createTodo(inputTask.value, currentProject));
     inputStorage(allProjects);
     console.log(allProjects);
     renderTodo(allProjects);
@@ -20,13 +22,34 @@ export function getInput(e) {
 let todoIndex = 0;
 
     //create todo
-export function createTodo(task, creationDate, important, checked, index) {
+export function createTodo(task, currentProject) {
+
+
     return {
     task,
     creationDate : moment().format("[Created on] ddd, MMM D"),
     important: false,
     checked: false,
-    index: todoIndex++
+    dueDate: null,
+    index: todoIndex++,
+    projectOf: currentProject,
+    // projectOf: currentProject,
+    // setProjectOf: () => {
+    //     switch (currentProject) {
+    //         case "all":
+    //         case "tasks":
+    //             {
+    //                 console.log(currentProject)
+    //                 projectOf = "tasks"}
+    //         break;
+    //         case "important":
+    //             {projectOf = "important"; important = true}
+    //         break;
+    //         case "completed":
+    //             {checked = true}
+    //         break;
+    //     }
+    //     }
     }
 }
 
@@ -63,4 +86,4 @@ export function setImportant(e) {
     console.log(`importantTodo is ${importantTodo}`);
     importantTodo.important = importantBtn.checked;
     localStorage.setItem("todos", JSON.stringify(importantTodo));
-}
+}  

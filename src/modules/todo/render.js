@@ -1,10 +1,11 @@
-import { clickImportant, todoContainer, checkTheBox, checkBoxes, starBtns } from "../dom";
+import { clickImportant, todoContainer, checkTheBox, checkBoxes, starBtns, inputProject, projectContainer } from "../dom";
 import { allProjects } from "../JSON/storage";
 import { filterCompleted, filterImportant, filterUncomplete } from "../projects/filter";
 
 /// Render todo
     //render the inputted todo in all
- export function renderTodo(filtereds) {
+ export function renderTodo(filtereds, currentProject) {
+
         // const todoContainer = document.getElementById("todo-container");
         todoContainer.innerHTML = '';
 
@@ -52,32 +53,62 @@ import { filterCompleted, filterImportant, filterUncomplete } from "../projects/
 
 /// Render the primary projects
 
-export function renderPrimary(e) {
-    const isPrimary = e.target.nodeName === 'DIV'
+export function getCurrentProject(e) {
+    const currentProjectBaru = h1
+
+
+    const currentProject = e.target.id;
+    const isPrimary = e.target.nodeName === 'DIV';
+
     if (!isPrimary) {
-        return
+        console.log('not primary')
     }
-    let currentProject = e.target.id;
+
+    return {currentProject, isPrimary};
+
+}
+
+
+export function renderPrimary(e) {
+
+    const {currentProject} = getCurrentProject(e)
 
     switch (currentProject) {
         case "all": {
             console.log(currentProject)
             const renderAll = allProjects.filter(filterUncomplete);
             console.log(renderAll)
-            renderTodo(renderAll);
+            renderTodo(renderAll, currentProject);
         }
         break;
         case "completed": {
             console.log(currentProject)
             const renderCompleted = allProjects.filter(filterCompleted);
             console.log(renderCompleted)
-            renderTodo(renderCompleted);
+            renderTodo(renderCompleted, currentProject);
         }
         break;
         case "important": {
             const renderImportant = allProjects.filter(filterImportant);
-            renderTodo(renderImportant);
+            renderTodo(renderImportant, currentProject);
         }
         break;
+    }
+}
+
+// function checkDuplicateProj() {
+//     const getProjects = document.querySelectorAll('user-projects')
+//     if 
+// }
+
+export function addNewProj (e) {
+    if (e.keyCode === 13) {
+    console.log('enter input project working')
+    const projectDiv = document.createElement('div');
+    projectDiv.classList.add('user-projects');
+    projectDiv.textContent = inputProject.value;
+
+    projectContainer.appendChild(projectDiv);
+    inputProject.value = ''
     }
 }
