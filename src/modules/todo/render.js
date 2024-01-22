@@ -1,7 +1,7 @@
 import { clickImportant, todoContainer, checkTheBox, checkBoxes, starBtns, inputProject, projectContainer } from "../dom";
 import { allProjects } from "../JSON/storage";
 import { filterCompleted, filterImportant, filterUncomplete } from "../projects/filter";
-
+import { allCustom, storeUserProjs } from "../JSON/storage";
 /// Render todo
     //render the inputted todo in all
  export function renderTodo(filtereds, currentProject) {
@@ -54,7 +54,7 @@ import { filterCompleted, filterImportant, filterUncomplete } from "../projects/
 /// Render the primary projects
 
 export function getCurrentProject(e) {
-    const currentProjectBaru = h1
+    // const currentProjectBaru = h1
 
 
     const currentProject = e.target.id;
@@ -96,19 +96,10 @@ export function renderPrimary(e) {
     }
 }
 
-// function checkDuplicateProj() {
-//     const getProjects = document.querySelectorAll('user-projects')
-//     if 
-// }
-
-export function addNewProj (e) {
-    if (e.keyCode === 13) {
-    console.log('enter input project working')
+export function renderProjects() {
     const projectDiv = document.createElement('div');
     projectDiv.classList.add('user-projects');
     projectDiv.textContent = inputProject.value;
 
     projectContainer.appendChild(projectDiv);
-    inputProject.value = ''
-    }
 }

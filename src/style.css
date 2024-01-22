@@ -92,3 +92,12 @@ h1 {
     padding: 1rem;
     background-color: rgba(57, 57, 57, 0.562);
 }
+
+#bottom {
+    display: flex;
+    gap: 1em;
+}
+
+#add-project {
+    background-color: rgba(57, 57, 57, 0.562);
+}

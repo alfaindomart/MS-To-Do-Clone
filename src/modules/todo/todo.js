@@ -68,7 +68,7 @@ export function checked(e) {
 
     //delete todo
 export function deleteTodo(e) {
-    const delBtn = e.target
+    const delBtn = e.target;
     const delTodo = delBtn.closest('.todo');
     const delTodoIdx = delTodo.dataset.todoIndex;
     console.log(delTodoIdx);

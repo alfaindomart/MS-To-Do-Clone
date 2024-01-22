@@ -1,7 +1,7 @@
 import { renderPrimary } from "./todo/render";
 import { getInput, setImportant } from "./todo/todo";
 import { checked } from "./todo/todo";
-import { addNewProj } from "./todo/render";
+import { addNewProj } from "./projects/projects";
 //todo container DOM - export to render
 export const todoContainer = document.getElementById("todo-container")
 
