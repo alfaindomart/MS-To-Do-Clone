@@ -1,7 +1,6 @@
-import { clickImportant, todoContainer, checkTheBox, checkBoxes, starBtns, inputProject, projectContainer } from "../dom";
-import { allProjects } from "../JSON/storage";
+import { clickImportant, todoContainer, checkTheBox, checkBoxes, starBtns, inputProject, projectContainer, clickCustomProj } from "../dom";
+import { allProjects, allCustom } from "../JSON/storage";
 import { filterCompleted, filterImportant, filterUncomplete } from "../projects/filter";
-import { allCustom, storeUserProjs } from "../JSON/storage";
 /// Render todo
     //render the inputted todo in all
  export function renderTodo(filtereds, currentProject) {
@@ -48,7 +47,6 @@ import { allCustom, storeUserProjs } from "../JSON/storage";
         starBtns = document.getElementsByClassName("star");
         clickImportant();
         checkTheBox();
-        console.log('starCheckbox');
     }
 
 /// Render the primary projects
@@ -56,39 +54,38 @@ import { allCustom, storeUserProjs } from "../JSON/storage";
 export function getCurrentProject(e) {
     // const currentProjectBaru = h1
 
-
     const currentProject = e.target.id;
     const isPrimary = e.target.nodeName === 'DIV';
 
-    if (!isPrimary) {
-        console.log('not primary')
-    }
-
     return {currentProject, isPrimary};
-
 }
 
 
 export function renderPrimary(e) {
 
-    const {currentProject} = getCurrentProject(e)
+    const {currentProject, isPrimary} = getCurrentProject(e)
+
+    if (!isPrimary) {
+        console.log('not primary or custom projects')
+        return;
+    }
 
     switch (currentProject) {
-        case "all": {
+        case "All": {
             console.log(currentProject)
             const renderAll = allProjects.filter(filterUncomplete);
             console.log(renderAll)
             renderTodo(renderAll, currentProject);
         }
         break;
-        case "completed": {
+        case "Completed": {
             console.log(currentProject)
             const renderCompleted = allProjects.filter(filterCompleted);
             console.log(renderCompleted)
             renderTodo(renderCompleted, currentProject);
         }
         break;
-        case "important": {
+        case "Important": {
             const renderImportant = allProjects.filter(filterImportant);
             renderTodo(renderImportant, currentProject);
         }
@@ -96,10 +93,15 @@ export function renderPrimary(e) {
     }
 }
 
-export function renderProjects() {
-    const projectDiv = document.createElement('div');
-    projectDiv.classList.add('user-projects');
-    projectDiv.textContent = inputProject.value;
+export function renderProjects(allCustProjects) {
 
-    projectContainer.appendChild(projectDiv);
+    projectContainer.innerHTML = ''
+
+    allCustProjects.forEach((customProject) => {
+        const projectDiv = document.createElement('div');
+        projectDiv.classList.add('user-projects');
+        projectDiv.textContent = customProject.projectName;
+    
+        projectContainer.appendChild(projectDiv);
+    })
 }

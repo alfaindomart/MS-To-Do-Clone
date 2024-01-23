@@ -1,20 +1,34 @@
 import { renderProjects } from "../todo/render";
 import { inputProject } from "../dom";
+import { allCustom, storeUserProjs } from "../JSON/storage";
 
 function checkDuplicateProj() {
-    const getProjects = document.querySelectorAll('user-projects')
-    console.log(getProjects);
+    let duplicateNum = 1
+    let originalProjectName = inputProject.value;
+    while (allCustom.some(e => e.projectName === inputProject.value)) {
+        inputProject.value = originalProjectName + `(${duplicateNum++})`
+    };
 }
 
 export function addNewProj (e) {
     if (e.keyCode === 13) {
     checkDuplicateProj();
-    console.log('enter input project working');
-    renderProjects()
-    inputProject.value = ''
+    allCustom.push(createCustomProjects(inputProject.value));
+    storeUserProjs(allCustom);
+    console.log(allCustom);
+    renderProjects(allCustom);
+    inputProject.value = '';
     }
 }
 
-// export function createProjects(projects) {
-    
-// } 
+let projectIndex = 0
+
+export function createCustomProjects(projectName) {
+    return {
+        projectName,
+        icon: null,
+        active: true,
+        index: projectIndex++
+    }
+}
+
