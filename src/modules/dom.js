@@ -1,7 +1,7 @@
 import { renderPrimary, renderCustomProject } from "./todo/render";
 import { getInput, setImportant } from "./todo/todo";
 import { checked } from "./todo/todo";
-import { addNewProj } from "./projects/projects";
+import { addNewProj, switchProject } from "./projects/projects";
 //todo container DOM - export to render
 export const todoContainer = document.getElementById("todo-container")
 
@@ -14,7 +14,7 @@ const primary = document.getElementById("primary");
     const tasks = document.getElementById("tasks");
 
 //Projects Dom
-const projTitleMain = document.querySelector('h1');
+export const projTitleMain = document.querySelector('h1');
 export const inputProject = document.getElementById("add-project");
 export const projectContainer = document.getElementById("projects");
 
@@ -36,7 +36,7 @@ export function checkTheBox() {
 export const clickPrimary = primary.addEventListener('click', renderPrimary)
 
 //handle user's custom projects event
-export const clickCustomProj = projectContainer.addEventListener('click', renderCustomProject);
+export const clickCustomProj = projectContainer.addEventListener('click', switchProject);
 
 //handle input Todo event
 export function enterInput (){inputTask.addEventListener("keydown", getInput);}

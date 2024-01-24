@@ -1,4 +1,4 @@
-import { clickImportant, todoContainer, checkTheBox, checkBoxes, starBtns, inputProject, projectContainer, clickCustomProj } from "../dom";
+import { clickImportant, todoContainer, checkTheBox, checkBoxes, starBtns, inputProject, projectContainer, clickCustomProj, projTitleMain } from "../dom";
 import { allProjects, allCustom } from "../JSON/storage";
 import { filterCompleted, filterImportant, filterUncomplete } from "../projects/filter";
 /// Render todo
@@ -96,11 +96,15 @@ export function renderPrimary(e) {
 export function renderProjects(allCustProjects) {
 
     projectContainer.innerHTML = ''
+    projTitleMain.innerText = ''
 
     allCustProjects.forEach((customProject) => {
         const projectDiv = document.createElement('div');
         projectDiv.classList.add('user-projects');
         projectDiv.textContent = customProject.projectName;
+        projectDiv.dataset.projIndex = customProject.index;
+
+        projTitleMain.textContent = customProject.projectName;
     
         projectContainer.appendChild(projectDiv);
     })
