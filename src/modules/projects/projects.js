@@ -42,20 +42,26 @@ function activateNewProject() {
     });
 }
 
+export let currentProject;
+
 export function switchProject(e) {
+    //deactivate all projects
     allCustom.forEach(element => element.active = false)
+
+    //get clicked project
     const clickedProject = e.target
     const clickedProjClosest = clickedProject.closest('.user-projects')
-    console.log(clickedProject)
     const clickedProjIndex = clickedProjClosest.dataset.projIndex
-    console.log(clickedProjIndex)
     const projActiveState = allCustom[clickedProjIndex]
+
+    //change the clicked project's state to active and update change to storage
     projActiveState.active = true
     storeUserProjs(projActiveState)
-    console.log(allCustom)
-}
-
-function activateClickedProj() {
-    //activate clicked project and deactivate all other projects in the storage
     
+    //set active as current project so it can be used in other code
+    currentProject = projActiveState.projectName
+    console.log(allCustom)
+    return {
+        currentProject
+    }
 }
