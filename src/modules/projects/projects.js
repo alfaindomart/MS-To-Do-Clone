@@ -14,6 +14,7 @@ export function addNewProj (e) {
     if (e.keyCode === 13) {
     checkDuplicateProj();
     allCustom.push(createCustomProjects(inputProject.value));
+    activateNewProject();
     storeUserProjs(allCustom);
     console.log(allCustom);
     renderProjects(allCustom);
@@ -32,3 +33,10 @@ export function createCustomProjects(projectName) {
     }
 }
 
+function activateNewProject() {
+    allCustom.forEach(e => {
+        if (e.projectName !== inputProject.value) {
+            e.active = false;
+        }
+    });
+}

@@ -54,10 +54,10 @@ import { filterCompleted, filterImportant, filterUncomplete } from "../projects/
 export function getCurrentProject(e) {
     // const currentProjectBaru = h1
 
-    const currentProject = e.target.id;
-    const isPrimary = e.target.nodeName === 'DIV';
+    // const currentProject = e.target.id;
+    // const isPrimary = e.target.nodeName === 'DIV';
 
-    return {currentProject, isPrimary};
+    // return {currentProject, isPrimary};
 }
 
 
