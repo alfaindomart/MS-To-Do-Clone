@@ -1,14 +1,16 @@
-import { clickImportant, todoContainer, checkTheBox, checkBoxes, starBtns, inputProject, projectContainer, clickCustomProj, projTitleMain } from "../dom";
+import { clickImportant, todoContainer, checkTheBox, checkBoxes, starBtns, projectContainer, projTitleMain } from "../dom";
 import { allProjects, allCustom } from "../JSON/storage";
-import { filterCompleted, filterImportant, filterUncomplete } from "../projects/filter";
+import { filterCompleted, filterImportant, filterUncomplete, filterProjectOf } from "../projects/filter";
+import { currentProject } from "../projects/projects";
 /// Render todo
     //render the inputted todo in all
- export function renderTodo(filtereds, currentProject) {
+ export function renderTodo(filtereds) {
 
         // const todoContainer = document.getElementById("todo-container");
         todoContainer.innerHTML = '';
 
         filtereds.forEach((todo, index) => {
+            if (todo.projectOf === currentProject) {
             const todoDiv = document.createElement('div');
             todoDiv.classList.add('todo');
             todoDiv.dataset.todoIndex = index;
@@ -41,7 +43,7 @@ import { filterCompleted, filterImportant, filterUncomplete } from "../projects/
             todoDiv.appendChild(starContainer);
         
             todoContainer.appendChild(todoDiv);
-
+            }
         })
         checkBoxes = document.getElementsByClassName("check");
         starBtns = document.getElementsByClassName("star");
@@ -61,9 +63,7 @@ export function getCurrentProject(e) {
 }
 
 
-export function renderPrimary(e) {
-
-    const {currentProject, isPrimary} = getCurrentProject(e)
+export function renderPrimary() {
 
     if (!isPrimary) {
         console.log('not primary or custom projects')
@@ -93,7 +93,7 @@ export function renderPrimary(e) {
     }
 }
 
-export function renderProjects(allCustProjects) {
+export function renderNewProjects(allCustProjects) {
 
     projectContainer.innerHTML = ''
     projTitleMain.innerText = ''
@@ -107,5 +107,13 @@ export function renderProjects(allCustProjects) {
         projTitleMain.textContent = customProject.projectName;
     
         projectContainer.appendChild(projectDiv);
-    })
+    })   
+}
+
+export function renderClickedProj() {
+    projTitleMain.innerText = currentProject;
+    todoContainer.innerHTML = '';
+    
+    const renderProjectOf = allProjects.filter(filterProjectOf);
+    renderTodo(renderProjectOf);
 }

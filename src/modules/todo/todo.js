@@ -1,15 +1,14 @@
 import moment from 'moment';
 import { allProjects } from '../JSON/storage';
 import { get } from 'lodash';
-import { renderTodo, getCurrentProject } from './render';
+import { renderTodo } from './render';
 import { inputTask } from '../dom';
 import { inputStorage } from '../JSON/storage';
+import { currentProject } from '../projects/projects';
 
 //do something when press enter
 export function getInput(e) {
     if (e.keyCode === 13) {
-    const {currentProject} = getCurrentProject(e)
-    console.log(`current project is ${currentProject}`)
     allProjects.push(createTodo(inputTask.value, currentProject));
     inputStorage(allProjects);
     console.log(allProjects);
@@ -22,7 +21,7 @@ export function getInput(e) {
 let todoIndex = 0;
 
     //create todo
-export function createTodo(task, currentProject) {
+export function createTodo(task, projectOf) {
 
 
     return {
@@ -32,7 +31,7 @@ export function createTodo(task, currentProject) {
     checked: false,
     dueDate: null,
     index: todoIndex++,
-    projectOf: currentProject,
+    projectOf,
     // projectOf: currentProject,
     // setProjectOf: () => {
     //     switch (currentProject) {

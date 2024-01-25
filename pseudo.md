@@ -265,3 +265,22 @@ checkDuplicateProj() {
     query select user
 }
 
+
+//render new todo after switching project
+user add new project "gift list", on enter:
+addNewProj ->
+    push project to allCustom
+    Store to storage
+    renderNewProject
+     currenProject = gift list
+user add new todo "keychain", on enter:
+ getInput(e)-> 
+    push 'keychain' to allProjects
+    todo.projectOf: gift list
+    inputStorage(allProject) to update storage
+    render allProject
+user add new project "places to visit" -> currentPrroject = places to visit
+todo container empty
+user add new todo "Eiffel Tower" -> Eiffel ProjectOf: places to visit
+
+

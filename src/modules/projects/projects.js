@@ -1,4 +1,4 @@
-import { renderProjects } from "../todo/render";
+import { renderNewProjects } from "../todo/render";
 import { inputProject } from "../dom";
 import { allCustom, storeUserProjs } from "../JSON/storage";
 
@@ -18,7 +18,8 @@ export function addNewProj (e) {
     activateNewProject();
     storeUserProjs(allCustom);
     console.log(allCustom);
-    renderProjects(allCustom);
+    renderNewProjects(allCustom);
+    console.log(currentProject);
     inputProject.value = '';
     }
 }
@@ -40,6 +41,7 @@ function activateNewProject() {
             e.active = false;
         }
     });
+    setCurrentProject()
 }
 
 export let currentProject;
@@ -58,10 +60,12 @@ export function switchProject(e) {
     projActiveState.active = true
     storeUserProjs(projActiveState)
     
-    //set active as current project so it can be used in other code
-    currentProject = projActiveState.projectName
-    console.log(allCustom)
-    return {
-        currentProject
-    }
+    setCurrentProject()
+}
+
+function setCurrentProject() {
+    allCustom.forEach(e => {
+        if (e.active === true) {currentProject = e.projectName}
+    })
+    return currentProject
 }

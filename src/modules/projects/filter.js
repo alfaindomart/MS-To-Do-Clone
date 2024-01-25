@@ -2,6 +2,8 @@
 //     if (todos.checked) return true; else return false 
 // }
 
+import { currentProject } from "./projects";
+
 export function filterCompleted(todos) {
     return todos.checked;
 }
@@ -22,3 +24,6 @@ export function filterImportant(todos) {
 //     if 
 // }
 
+export function filterProjectOf(todos) {
+    if (todos.projectOf === currentProject) return todos.projectOf
+}
