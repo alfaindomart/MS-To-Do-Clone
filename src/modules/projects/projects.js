@@ -1,28 +1,33 @@
-import { renderNewProjects } from "../todo/render";
-import { inputProject } from "../dom";
-import { allCustom, storeUserProjs } from "../JSON/storage";
+import { renderNewProjects, primaryState } from "../todo/render";
+import { inputProject, inputContainer } from "../dom";
+import { allProjects, storeUserProjs } from "../JSON/storage";
 
+//give number to projectName if the same name exist in allProjects array
 function checkDuplicateProj() {
-    console.log(allCustom)
     let duplicateNum = 1
     let originalProjectName = inputProject.value;
-    while (allCustom.some(e => e.projectName === inputProject.value)) {
+    while (allProjects.some(e => e.projectName === inputProject.value)) {
         inputProject.value = originalProjectName + `(${duplicateNum++})`
     };
-}
+};
 
+//when user press enter, check any duplicate project, push the input to allProjects array,
+//activate new project and deactivate others, update the storage, render new projects
 export function addNewProj (e) {
     if (e.keyCode === 13) {
     checkDuplicateProj();
-    allCustom.push(createCustomProjects(inputProject.value));
+    allProjects.push(createCustomProjects(inputProject.value));
     activateNewProject();
-    storeUserProjs(allCustom);
-    console.log(allCustom);
-    renderNewProjects(allCustom);
+    storeUserProjs(allProjects);
+    console.log(allProjects);
+    renderNewProjects(allProjects);
     console.log(currentProject);
+    inputContainer.style.display = "block";
     inputProject.value = '';
     }
 }
+
+//create project's object
 
 let projectIndex = 0
 
@@ -35,8 +40,9 @@ export function createCustomProjects(projectName) {
     }
 }
 
+//activate newly created project and deactivate other projects
 function activateNewProject() {
-    allCustom.forEach(e => {
+    allProjects.forEach(e => {
         if (e.projectName !== inputProject.value) {
             e.active = false;
         }
@@ -44,28 +50,37 @@ function activateNewProject() {
     setCurrentProject()
 }
 
+//set current project state
 export let currentProject;
 
+//event for when user click user's projects
 export function switchProject(e) {
     //deactivate all projects
-    allCustom.forEach(element => element.active = false)
+    allProjects.forEach(element => element.active = false)
 
     //get clicked project
     const clickedProject = e.target
     const clickedProjClosest = clickedProject.closest('.user-projects')
     const clickedProjIndex = clickedProjClosest.dataset.projIndex
-    const projActiveState = allCustom[clickedProjIndex]
+    const projActiveState = allProjects[clickedProjIndex]
 
     //change the clicked project's state to active and update change to storage
     projActiveState.active = true
     storeUserProjs(projActiveState)
     
+    //look for active project and set it as currentProject
     setCurrentProject()
+
+    inputContainer.style.display = "block";
+
 }
 
 function setCurrentProject() {
-    allCustom.forEach(e => {
-        if (e.active === true) {currentProject = e.projectName}
+    allProjects.forEach(e => {
+        if (e.active === true) {
+            currentProject = e.projectName;
+            primaryState = false
+        }
     })
-    return currentProject
+    return {currentProject, primaryState}
 }

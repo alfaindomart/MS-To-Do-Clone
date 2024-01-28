@@ -1,7 +1,3 @@
-// export function filterCompleted(todos) {
-//     if (todos.checked) return true; else return false 
-// }
-
 import { currentProject } from "./projects";
 
 export function filterCompleted(todos) {

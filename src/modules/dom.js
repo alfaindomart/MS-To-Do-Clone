@@ -6,7 +6,8 @@ import { addNewProj, switchProject, currentProject} from "./projects/projects";
 export const todoContainer = document.getElementById("todo-container")
 
 //Primary projects DOM
-const primary = document.getElementById("primary");
+const primaryContainer = document.getElementById("primary-container");
+const primary = document.querySelectorAll(".primary");
     const myDay = document.getElementById("my-day");
     const important = document.getElementById("important");
     const all = document.getElementById("all");
@@ -19,6 +20,7 @@ export const inputProject = document.getElementById("add-project");
 export const projectContainer = document.getElementById("projects");
 
 //input dom
+export const inputContainer = document.getElementById("input-container")
 export const inputTask = document.getElementById("input-task");
 
 //todo DOM
@@ -33,7 +35,7 @@ export function checkTheBox() {
 }
 
 //handle primary projects event
-export const clickPrimary = primary.addEventListener('click', renderPrimary)
+export const clickPrimary = primaryContainer.addEventListener('click', renderPrimary)
 
 //handle user's custom projects event
 export const clickCustomProj = projectContainer.addEventListener('click', (e) => {
