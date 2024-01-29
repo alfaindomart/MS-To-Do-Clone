@@ -1,6 +1,6 @@
 import _ from 'lodash';
 import './style.css';
-import { enterInput, checkTheBox, clickPrimary, clickImportant, enterProject, clickCustomProj } from './modules/dom';
+import { enterInput, checkTheBox, clickPrimary, clickImportant, enterProject, clickCustomProj, clickDelete } from './modules/dom';
 
 
 enterInput()
@@ -9,6 +9,7 @@ checkTheBox()
 clickPrimary
 clickCustomProj
 clickImportant()
+clickDelete()
 
 //get input box value
 // const inputTask = document.getElementById("input-task");

@@ -13,16 +13,15 @@ function checkDuplicateProj() {
 
 //when user press enter, check any duplicate project, push the input to allProjects array,
 //activate new project and deactivate others, update the storage, render new projects
-export function addNewProj (e) {
+export function addNewProj (e) {    
     if (e.keyCode === 13) {
+    
+    inputContainer.style.display = "block";
     checkDuplicateProj();
     allProjects.push(createCustomProjects(inputProject.value));
     activateNewProject();
     storeUserProjs(allProjects);
-    console.log(allProjects);
     renderNewProjects(allProjects);
-    console.log(currentProject);
-    inputContainer.style.display = "block";
     inputProject.value = '';
     }
 }

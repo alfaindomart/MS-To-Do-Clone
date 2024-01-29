@@ -33,7 +33,6 @@ export function getInput(e) {
 
 export function createTodo(task, projectOf) {
 
-
     return {
     task,
     creationDate : moment().format("[Created on] ddd, MMM D"),
@@ -63,7 +62,13 @@ export function deleteTodo(e) {
     const target = e.target;
     const delTodo = target.closest('.todo');
     const delTodoIdx = delTodo.dataset.todoIndex;
-    console.log(delTodoIdx);
+    
+    console.log(delTodoIdx)
+    allTodos.splice(delTodoIdx, 1);
+    inputStorage(allTodos);
+
+    if (!primaryState) {renderTodo(allTodos)}
+    else if (primaryState) {renderPrimaryTodo(allTodos)}
 }
 
     //set todo as important
@@ -76,4 +81,4 @@ export function setImportant(e) {
     importantTodo.important = target.checked;
 
     localStorage.setItem("todos", JSON.stringify(importantTodo));
-}  
+}

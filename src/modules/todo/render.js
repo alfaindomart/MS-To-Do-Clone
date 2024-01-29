@@ -1,4 +1,4 @@
-import { clickImportant, todoContainer, checkTheBox, checkBoxes, starBtns, projectContainer, projTitleMain, inputContainer} from "../dom";
+import { clickImportant, todoContainer, checkTheBox, checkBoxes, starBtns, projectsContainer, projTitleMain, inputContainer, deleteTodoBtns, clickDelete} from "../dom";
 import { allTodos } from "../JSON/storage";
 import { filterCompleted, filterImportant, filterUncomplete, filterProjectOf } from "../projects/filter";
 import { currentProject } from "../projects/projects";
@@ -49,8 +49,10 @@ import { currentProject } from "../projects/projects";
         //add classname and click event to newly created checkbox and important btns elements
         checkBoxes = document.getElementsByClassName("check");
         starBtns = document.getElementsByClassName("star");
+        deleteTodoBtns = document.getElementsByClassName("delete-btn");
         clickImportant();
         checkTheBox();
+        clickDelete();
     }
 
     //create elements from allTodos array for primary projects
@@ -95,8 +97,11 @@ export function renderPrimaryTodo(todos) {
         //add classname and click event to newly created checkbox and important btns elements
         checkBoxes = document.getElementsByClassName("check");
         starBtns = document.getElementsByClassName("star");
+        deleteTodoBtns = document.getElementsByClassName("delete-btn");
         clickImportant();
         checkTheBox();
+        clickDelete();
+
 }
 
 
@@ -161,16 +166,22 @@ export function renderNewProjects(allCustProjects) {
 
     todoContainer.innerHTML = ''
     projTitleMain.innerText = ''
+    projectsContainer.innerHTML = ''
 
     allCustProjects.forEach((customProject) => {
+        
+        console.log(customProject)
+        console.log(allCustProjects)
+
         const projectDiv = document.createElement('div');
         projectDiv.classList.add('user-projects');
         projectDiv.textContent = customProject.projectName;
         projectDiv.dataset.projIndex = customProject.index;
 
         projTitleMain.textContent = customProject.projectName;
+
     
-        projectContainer.appendChild(projectDiv);
+        projectsContainer.appendChild(projectDiv);
     })   
 }
 
