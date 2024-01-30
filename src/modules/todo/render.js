@@ -34,6 +34,11 @@ import { currentProject } from "../projects/projects";
             delBtn.classList.add('delete-btn');
             delBtn.innerHTML = 'X';
             delBtn.style.color = 'red';
+
+            if (todo.checked === true) {
+                todoDiv.classList.add('completed');
+                checkbox.classList.add('completed');
+            } 
         
             starContainer.appendChild(starCheckbox);
             starContainer.appendChild(delBtn);
@@ -83,6 +88,11 @@ export function renderPrimaryTodo(todos) {
             delBtn.classList.add('delete-btn');
             delBtn.innerHTML = 'X';
             delBtn.style.color = 'red';
+
+            if (todo.checked === true) {
+                todoDiv.classList.add('completed');
+                checkbox.classList.add('completed');
+            } 
         
             starContainer.appendChild(starCheckbox);
             starContainer.appendChild(delBtn);

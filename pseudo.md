@@ -283,4 +283,11 @@ user add new project "places to visit" -> currentPrroject = places to visit
 todo container empty
 user add new todo "Eiffel Tower" -> Eiffel ProjectOf: places to visit
 
+//striketrough todo
+user clicked keychain checkbox:
+checked(e) -> 
+    set clicked todo to checked:true, and update storage
+    keychain.checked = true
+    instantly rerender alltodos
+
 

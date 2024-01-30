@@ -13,6 +13,7 @@ export function getInput(e) {
     inputStorage(allTodos);
     console.log(`getInput - allTodos is: ${JSON.stringify(allTodos)}`);
     renderTodo(allTodos);
+    console.log(allTodos)
     inputTask.value = '';
     }
 
@@ -20,6 +21,7 @@ export function getInput(e) {
     allTodos.push(createTodo(inputTask.value, currentProject));
     inputStorage(allTodos);
     renderPrimaryTodo(allTodos);
+    console.log(allTodos)
     inputTask.value = '';
     }
 }
@@ -55,6 +57,9 @@ export function checked(e) {
         todoChecked.checked = target.checked;
 
         localStorage.setItem("todos", JSON.stringify(todoChecked))
+
+        if (!primaryState) {renderTodo(allTodos)}
+        else if (primaryState) {renderPrimaryTodo(allTodos)}
     }
 
     //delete todo from storage and frontend
@@ -82,3 +87,11 @@ export function setImportant(e) {
 
     localStorage.setItem("todos", JSON.stringify(importantTodo));
 }
+
+// export function striketroughTodo(checked) {
+//     allTodos.forEach(todo => {
+//         if (todo.checked) {
+
+//         }
+//     });
+// }
