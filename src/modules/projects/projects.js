@@ -1,6 +1,6 @@
 import { renderNewProjects, primaryState } from "../todo/render";
 import { inputProject, inputContainer } from "../dom";
-import { allProjects, storeUserProjs } from "../JSON/storage";
+import { allProjects, allTodos, storeUserProjs } from "../JSON/storage";
 
 //give number to projectName if the same name exist in allProjects array
 function checkDuplicateProj() {
@@ -35,7 +35,8 @@ export function createCustomProjects(projectName) {
         projectName,
         icon: null,
         active: true,
-        index: projectIndex++
+        index: projectIndex++,
+        sortMode: false,
     }
 }
 
@@ -46,7 +47,7 @@ function activateNewProject() {
             e.active = false;
         }
     });
-    setCurrentProject()
+    setCurrentProject();
 }
 
 //set current project state
@@ -66,12 +67,13 @@ export function switchProject(e) {
     //change the clicked project's state to active and update change to storage
     projActiveState.active = true
     storeUserProjs(projActiveState)
+
     
     //look for active project and set it as currentProject
     setCurrentProject()
 
+    //show input container after coming back from "Completed" menu
     inputContainer.style.display = "block";
-
 }
 
 function setCurrentProject() {
@@ -82,4 +84,26 @@ function setCurrentProject() {
         }
     })
     return {currentProject, primaryState}
+}
+
+export let projectSort;
+
+export function setSortMode(e) {
+    const target = e.target
+    const sortTarget = target.closest('.sorts')
+    const sortName = sortTarget.textContent;
+
+    projectSort = sortName;
+
+    const setProject = allProjects.find(todo => todo.projectName === currentProject)
+    setProject.sortMode = projectSort
+    console.log(setProject)
+    storeUserProjs(setProject)
+}
+
+export let currentProjectSort;
+
+export function checkProjsort() {
+    const getProject = allProjects.find(project => project.projectName === currentProject)
+   if (getProject.sortMode) {currentProjectSort = getProject.sortMode} else if(!getProject.sortMode) {console.log('no sort mode')}
 }

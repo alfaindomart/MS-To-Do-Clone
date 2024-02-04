@@ -1,7 +1,8 @@
 import { clickImportant, todoContainer, checkTheBox, checkBoxes, starBtns, projectsContainer, projTitleMain, inputContainer, deleteTodoBtns, clickDelete} from "../dom";
-import { allTodos } from "../JSON/storage";
+import { allTodos, allProjects } from "../JSON/storage";
 import { filterCompleted, filterImportant, filterUncomplete, filterProjectOf } from "../projects/filter";
-import { currentProject } from "../projects/projects";
+import { currentProject, setSortMode, checkProjsort, currentProjectSort } from "../projects/projects";
+import { sortAlphabet } from "../projects/sort";
 /// Render todo
     //create elements from available todos in allTodos array
 
@@ -197,9 +198,30 @@ export function renderNewProjects(allCustProjects) {
 
 //render the clicked custom project and its todos
 export function renderClickedProj() {
+
     projTitleMain.innerText = currentProject;
     todoContainer.innerHTML = '';
-    
     const renderProjectOf = allTodos.filter(filterProjectOf);
-    renderTodo(renderProjectOf);
+
+    checkProjsort();
+
+    if (currentProjectSort) {
+        const sortedProject = sortAlphabet(renderProjectOf)
+        console.log(sortedProject)
+        renderTodo(sortedProject);
+    } else if (!currentProjectSort) {renderTodo(renderProjectOf);}
+
+    //change H1 and empty content
 }
+
+export function renderSort() {
+    if (primaryState) {
+        const sortedPrimaryTodos = sortAlphabet(allTodos);
+        renderPrimaryTodo(sortedPrimaryTodos); 
+    }
+    else if (!primaryState) {
+        const renderProjectOf = allTodos.filter(filterProjectOf);
+        const sortedTodos = sortAlphabet(renderProjectOf);
+        renderTodo(sortedTodos)
+    }
+} 

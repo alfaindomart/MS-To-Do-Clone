@@ -1,7 +1,7 @@
-import { renderPrimary, renderClickedProj } from "./todo/render";
+import { renderPrimary, renderClickedProj, renderSort } from "./todo/render";
 import { getInput, setImportant, deleteTodo } from "./todo/todo";
 import { checked } from "./todo/todo";
-import { addNewProj, switchProject, currentProject} from "./projects/projects";
+import { addNewProj, switchProject, currentProject, setSortMode} from "./projects/projects";
 //todo container DOM - export to render
 export const todoContainer = document.getElementById("todo-container")
 
@@ -28,6 +28,7 @@ export const inputTask = document.getElementById("input-task");
 export let checkBoxes = document.getElementsByClassName("check");
 export let starBtns = document.getElementsByClassName("star");
 export let deleteTodoBtns = document.getElementsByClassName("delete-btn");
+export let sortBtns = document.getElementsByClassName("sorts");
 
 //handle checkbox event
 export function checkTheBox() {
@@ -61,4 +62,12 @@ export function enterProject () {inputProject.addEventListener('keydown', addNew
 //handle delete todo event
 export function clickDelete () {
     Array.from(deleteTodoBtns).forEach(deleteBtn => {deleteBtn.addEventListener('click', deleteTodo)})
+}
+
+//handle sort todo event
+export function clickSorts () {
+    Array.from(sortBtns).forEach(sortBtn => {sortBtn.addEventListener('click', (e) => {
+        setSortMode(e);
+        renderSort();
+    })})
 }

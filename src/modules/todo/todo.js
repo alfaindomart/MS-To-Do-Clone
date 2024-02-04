@@ -4,15 +4,23 @@ import { get } from 'lodash';
 import { renderTodo, primaryState, renderPrimaryTodo} from './render';
 import { inputTask } from '../dom';
 import { inputStorage } from '../JSON/storage';
-import { currentProject } from '../projects/projects';
-
+import { currentProject, checkProjsort, currentProjectSort } from '../projects/projects';
+import { sortAlphabet } from '../projects/sort';
 //store todo to allTodos storage and render the new todo when user press enter in input box
 export function getInput(e) {
     if (e.keyCode === 13 && !primaryState) {
     allTodos.push(createTodo(inputTask.value, currentProject));
     inputStorage(allTodos);
     console.log(`getInput - allTodos is: ${JSON.stringify(allTodos)}`);
-    renderTodo(allTodos);
+
+    checkProjsort()
+
+    if (currentProjectSort) {
+        const sortedProject = sortAlphabet(allTodos)
+        console.log(sortedProject)
+        renderTodo(sortedProject);
+    } else if (!currentProjectSort) {renderTodo(allTodos);}
+
     console.log(allTodos)
     inputTask.value = '';
     }
@@ -20,7 +28,12 @@ export function getInput(e) {
     else if (e.keyCode === 13 && primaryState) {
     allTodos.push(createTodo(inputTask.value, currentProject));
     inputStorage(allTodos);
-    renderPrimaryTodo(allTodos);
+    checkProjsort()
+    if (currentProjectSort) {
+        const sortedProject = sortAlphabet(allTodos)
+        console.log(sortedProject)
+        renderPrimaryTodo(sortedProject);
+    } else if (!currentProjectSort) {renderPrimaryTodo(allTodos);}
     console.log(allTodos)
     inputTask.value = '';
     }
@@ -88,10 +101,4 @@ export function setImportant(e) {
     localStorage.setItem("todos", JSON.stringify(importantTodo));
 }
 
-// export function striketroughTodo(checked) {
-//     allTodos.forEach(todo => {
-//         if (todo.checked) {
-
-//         }
-//     });
-// }
+//sort state

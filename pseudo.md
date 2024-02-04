@@ -290,4 +290,31 @@ checked(e) ->
     keychain.checked = true
     instantly rerender alltodos
 
-
+//sort todo
+user add todo "eat", "break", and "sleep", in 'daily' project
+daily {
+    projectName:daily
+    /
+    .
+    .
+    .
+    /
+    projectSort default
+}
+user set 'sleep' as important -> 'sleep' position move to top
+user click sort alphabetically ->
+    clickSort() {
+        what is clicked ? 'alphabetically' -> get sortName
+        let sorted = allTodos.sort(), return new array of sorted allTodos
+        set daily.sort to 'Alphabet'
+        render sorted
+    }
+  order is: 'eat', 'breal', 'sleep'
+user click "All" project, sort go back to default
+  order is: 'sleep', eat, break
+user go back to "daily" project, sort mode is alphabet -> switchProject() running
+    if currentproject.projectSort === true, run render sorted instead of storeUserP
+  order back to alphabet
+user add a new todo -> getInput() running
+    check again if currentProject has sortMode active
+    render sorted allTodos array instead of filtered projectOf array
